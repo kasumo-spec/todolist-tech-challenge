@@ -97,17 +97,17 @@ export default {
     background-color: #89043D;
   }
   .inputs {
-    display: flex;
-    place-items: center;
-    justify-content: center;
-    flex-direction: column;
     width: 46%;
+    display: flex;
     margin-left: 27%;
+    place-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
   .inputs input {
-    margin-top: 1rem;
     width: 21rem;
     border: none;
+    margin-top: 1rem;
     border-radius: 1rem;
     background-color: #2FE6DE;
     padding: 0.175rem 0.175rem 0.175rem 1rem;
@@ -119,10 +119,10 @@ export default {
   }
   .divTask {
     display: flex;
-    flex-direction: column;
+    padding: 0 0.175rem;
     align-items: center;
     border-radius: 0.225rem;
-    padding: 0 0.175rem;
+    flex-direction: column;
   }
   .divTask > *{
     margin: 0.175rem 0.125rem;
@@ -133,22 +133,22 @@ export default {
     justify-content: space-evenly;
   }
   .listItem{
-    margin-top: 0.215rem;
-    padding: 0.135rem;
     max-width: 21%;
+    padding: 0.135rem;
+    margin-top: 0.215rem;
   }
   button {
+    color: #fff;
     width: 6rem;
     border: none;
-    border-radius: 0.5rem;
     margin: 0.5rem;
-    padding: 0.32rem;
-    color: #fff;
     cursor: pointer;
+    padding: 0.32rem;
+    border-radius: 0.5rem;
   }
   .buttonCreate{
-    background-color: #18F2B2;
     color: black;
+    background-color: #18F2B2;
   }
   .buttonClone{
     background-color: #1C3041;
