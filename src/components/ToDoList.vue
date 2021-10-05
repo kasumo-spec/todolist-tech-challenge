@@ -1,5 +1,13 @@
 <template>
   <div class="toDoList">
+    <div class="inputs">
+      <input placeholder="Todo" v-model="title" />
+      <input placeholder="Description" v-model="description" />
+      <input type="date" v-model="limitDate" />
+      <div class="buttons">
+        <button class="buttonCreate" v-on:click="addTodo(title,description,limitDate)">Create Task</button>
+      </div>
+    </div>
     <div class="list">
       <div class="listItem" v-for="todo in todos" v-bind:key="todo.id">
         <div class="divTask" v-bind:class="getClass(todo.limitDate)">
@@ -12,17 +20,11 @@
             <label for="checkbox" v-if="todo.isComplete">True</label>
             <label for="checkbox" v-else>False</label>
           </div>
-          <button v-on:click="addTodo(todo.title,todo.description,todo.limitDate)" >Clone Task</button>
-          <button v-on:click="delTodo(todo.id)">Delete Task</button>
+          <div class="buttons">
+            <button class="buttonClone" v-on:click="addTodo(todo.title,todo.description,todo.limitDate)" >Clone Task</button>
+            <button class="buttonDelete" v-on:click="delTodo(todo.id)">Delete Task</button>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="inputs">
-      <input placeholder="Todo" v-model="title" />
-      <input placeholder="Description" v-model="description" />
-      <input type="date" v-model="limitDate" />
-      <div class="buttons">
-        <button v-on:click="addTodo(title,description,limitDate)">Create Task</button>
       </div>
     </div>
   </div>
@@ -119,7 +121,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 1rem;
+    border-radius: 0.225rem;
     padding: 0 0.175rem;
   }
   .divTask > *{
@@ -133,14 +135,26 @@ export default {
   .listItem{
     margin-top: 0.215rem;
     padding: 0.135rem;
-    max-width: 30%;
+    max-width: 21%;
   }
   button {
-    width: 7rem;
+    width: 6rem;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    padding: 0.32rem;
     color: #fff;
+    cursor: pointer;
+  }
+  .buttonCreate{
+    background-color: #18F2B2;
+    color: black;
+  }
+  .buttonClone{
     background-color: #1C3041;
+  }
+  .buttonDelete{
+    background-color: rgba(255, 0, 0, 0.69);
   }
   .isComplete{
     display: flex;
