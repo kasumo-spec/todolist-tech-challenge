@@ -21,6 +21,6 @@ export default {
   justify-content: center;
 }
 body {
-  background-color: #B2ABF2;
+  background-color: #fff;
 }
 </style>

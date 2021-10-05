@@ -10,10 +10,14 @@
     </div>
     <div class="list">
       <div class="listItem" v-for="todo in todos" v-bind:key="todo.id">
-        <div class="divTask" v-bind:class="getClass(todo.limitDate)">
-          <span>Task: {{ todo.title }}</span>
+        <div class="divTask">
+          <div class="titleJob">
+            <span>Task: {{ todo.title }}</span>
+            <div class="tag" v-bind:class="getClass(todo.limitDate)"></div>
+          </div>
           <span>Description: {{ todo.description }}</span>
-          <span>Limit Date: {{ todo.limitDate }}</span>
+          <span v-if="todo.limitDate">Limit Date: {{ todo.limitDate }}</span>
+          <span v-else>Limit Date: Without date.</span>
           <div class="isComplete">
             <span>Is Complete: </span>
             <input type="checkbox" id="checkbox" v-model="todo.isComplete" v-on:change="changeComplete(todo.id, todo.isComplete)">
@@ -39,7 +43,7 @@ export default {
   data() {
     return {
       todos: [],
-      today: new Date().toDateString()
+      today: new Date().toLocaleDateString()
     };
   },
   methods: {
@@ -65,7 +69,7 @@ export default {
       this.todos = await axios.get(url).then(res => res.data)
     },
     getClass(limitDate){
-      let testDate = new Date(limitDate).toDateString()
+      let testDate = new Date(limitDate).toLocaleDateString()
       if (testDate >= this.today) {
         return 'todoInDay'
       } else {
@@ -121,8 +125,9 @@ export default {
     display: flex;
     padding: 0 0.175rem;
     align-items: center;
-    border-radius: 0.225rem;
     flex-direction: column;
+    background-color: lightgrey;
+    border-radius: 0.225rem;
   }
   .divTask > *{
     margin: 0.175rem 0.125rem;
@@ -130,9 +135,11 @@ export default {
   .list{
     display: flex;
     flex-wrap: wrap;
+    width: 95vw;
     justify-content: space-evenly;
   }
   .listItem{
+    min-width: 20%;
     max-width: 21%;
     padding: 0.135rem;
     margin-top: 0.215rem;
@@ -155,6 +162,18 @@ export default {
   }
   .buttonDelete{
     background-color: rgba(255, 0, 0, 0.69);
+  }
+  .tag{
+    width: 0.575rem;
+    height: 0.575rem;
+    border-radius: 50%;
+    margin-right: 0.575rem;
+  }
+  .titleJob{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .isComplete{
     display: flex;
