@@ -1,21 +1,22 @@
 <template>
-  <div class="app">
-    <ul style="list-style-type:none;">
-      <li class="listItem" v-for="todo in todos" v-bind:key="todo.id">
+  <div class="toDoList">
+    <div class="list">
+      <div class="listItem" v-for="todo in todos" v-bind:key="todo.id">
         <div class="divTask" v-bind:class="getClass(todo.limitDate)">
           <span>Task: {{ todo.title }}</span>
           <span>Description: {{ todo.description }}</span>
           <span>Limit Date: {{ todo.limitDate }}</span>
-          <div>
+          <div class="isComplete">
             <span>Is Complete: </span>
             <input type="checkbox" id="checkbox" v-model="todo.isComplete" v-on:change="changeComplete(todo.id, todo.isComplete)">
-            <label for="checkbox">{{todo.isComplete}}</label>
+            <label for="checkbox" v-if="todo.isComplete">True</label>
+            <label for="checkbox" v-else>False</label>
           </div>
           <button v-on:click="addTodo(todo.title,todo.description,todo.limitDate)" >Clone Task</button>
           <button v-on:click="delTodo(todo.id)">Delete Task</button>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
     <div class="inputs">
       <input placeholder="Todo" v-model="title" />
       <input placeholder="Description" v-model="description" />
@@ -30,7 +31,7 @@
 
 <script>
 import axios from 'axios'
-let url = 'http://[::1]:3000/todolist'
+let url = 'https://api-for-exati-tech-test.herokuapp.com/todolist'
 
 export default {
   data() {
@@ -76,7 +77,6 @@ export default {
   },
   mounted: async function(){
     this.todos = await axios.get(url).then(res => res.data)
-    console.log(this.today)
   }
 };
 </script>
@@ -89,19 +89,26 @@ export default {
     content: "";
   }
   .todoInDay {
-    background-color: lightgreen;
+    background-color: #18F2B2;
   }
   .todoNotInDay {
-    background-color: orangered;
+    background-color: #89043D;
   }
   .inputs {
     display: flex;
     place-items: center;
+    justify-content: center;
     flex-direction: column;
+    width: 46%;
+    margin-left: 27%;
   }
   .inputs input {
-    width: 75%;
     margin-top: 1rem;
+    width: 21rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: #2FE6DE;
+    padding: 0.175rem 0.175rem 0.175rem 1rem;
   }
   .buttons {
     margin-top: 1rem;
@@ -112,13 +119,32 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 1rem;
+    padding: 0 0.175rem;
   }
   .divTask > *{
     margin: 0.175rem 0.125rem;
   }
+  .list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
   .listItem{
     margin-top: 0.215rem;
     padding: 0.135rem;
+    max-width: 30%;
   }
-
+  button {
+    width: 7rem;
+    border: none;
+    border-radius: 1rem;
+    color: #fff;
+    background-color: #1C3041;
+  }
+  .isComplete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>

@@ -20,4 +20,7 @@ export default {
   display: flex;
   justify-content: center;
 }
+body {
+  background-color: #B2ABF2;
+}
 </style>
